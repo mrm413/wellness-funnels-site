@@ -1,0 +1,9 @@
+﻿trafilatura
+readability-lxml
+beautifulsoup4
+requests
+pyyaml
+python-slugify
+python-frontmatter
+markdownify
+feedparser
