@@ -1,0 +1,29 @@
+﻿site:
+  base_url: "https://mrm413.github.io/wellness-funnels-site"
+  out_dir: "./"               # write pages into the repo root
+  author:  "Wellness Funnels"
+  category: "Wellness"
+  min_words: 900
+
+llm:
+  host: "http://127.0.0.1:11434"
+  model: "llama3.2:3b"
+  temperature: 0.6
+
+curation:
+  sources:
+    - "https://www.cdc.gov/healthyweight/index.html"
+    - "https://www.nih.gov/news-events/nih-research-matters"
+    - "https://www.who.int/news-room/releases"
+  max_new_links: 3
+  max_pool: 300
+
+offers:
+  clickbank_id: "YOURNICKNAME"
+  items:
+    - name: "Probiotic Health Booster"
+      hoplink: "https://{id}.vendor.hop.clickbank.net/?tid=BLOG"
+      blurb: "Clinically studied strains for gut balance."
+    - name: "Daily Greens Mix"
+      hoplink: "https://{id}.greenshop.hop.clickbank.net/?tid=BLOG"
+      blurb: "Whole-food micronutrients in one scoop."
