@@ -1,29 +1,64 @@
-﻿site:
-  base_url: "https://mrm413.github.io/wellness-funnels-site"
-  out_dir: "./"               # write pages into the repo root
-  author:  "Wellness Funnels"
-  category: "Wellness"
+site:
+  base_url: https://mrm413.github.io/wellness-funnels-site
+  out_dir: ./
+  author: Wellness Funnels
+  category: Wellness
   min_words: 900
-
 llm:
-  # OpenAI Configuration (no host needed)
-  model: "gpt-4o-mini"  # Options: gpt-4o-mini (cheapest), gpt-4o, gpt-3.5-turbo
+  # OpenAI Configuration (no host needed for OpenAI)
+  # For Ollama: uncomment host line and use llama3.2:3b
+  # host: http://127.0.0.1:11434
+  model: "gpt-4o-mini"  # Options: gpt-4o-mini (cheapest), gpt-4o, gpt-3.5-turbo, llama3.2:3b (for Ollama)
   temperature: 0.6
-
 curation:
   sources:
-    - "https://www.cdc.gov/healthyweight/index.html"
-    - "https://www.nih.gov/news-events/nih-research-matters"
-    - "https://www.who.int/news-room/releases"
+  - https://www.cdc.gov/healthyweight/index.html
+  - https://www.nih.gov/news-events/nih-research-matters
+  - https://www.who.int/news-room/releases
+  - https://health.clevelandclinic.org/food-to-boost-your-immune-system
+  - https://health.clevelandclinic.org/how-your-ancestry-and-ethnicity-affect-your-health
+  - https://health.clevelandclinic.org/is-oil-pulling-your-best-choice-for-dental-health
+  - https://health.clevelandclinic.org/the-best-foods-to-eat-when-you-have-breast-cancer
+  - https://www.epa.gov/air-emissions-inventories/where-can-i-find-biomass-emission-limits-biomass-burning-industry-i-am
+  - https://www.epa.gov/air-quality-implementation-plans/pennsylvania-sip-source-specific-requirement-allegheny-ludlum-2
+  - https://www.epa.gov/air-quality-implementation-plans/virginia-sip-source-specific-requirement-nabisco-brands-inc
+  - https://www.epa.gov/cyberwater/cybersecurity-102
+  - https://www.epa.gov/cyberwater/cybersecurity-103
+  - https://www.epa.gov/cyberwater/cybersecurity-refresher
+  - https://www.epa.gov/cyberwater/epa-quarterly-cybersecurity-vulnerability-snapshot-webinar
+  - https://www.epa.gov/cyberwater/water-cybersecurity-assessment-tool-wcat-webinar
+  - https://www.epa.gov/ems/region-1-boston-office-environmental-policy
+  - https://www.epa.gov/enforcement/city-evansville-clean-water-act-settlement
+  - https://www.epa.gov/environmental-economics/valuing-air-pollutions-impact-labor-productivity-general-equilibrium
+  - https://www.epa.gov/iaq-schools/what-epa-doing-about-indoor-air-quality-iaq-schools
+  - https://www.epa.gov/indoorairplus/how-can-i-use-social-media-help-promote-indoor-airplus
+  - https://www.epa.gov/npdes-permits/2023-draft-potable-water-treatment-facility-general-permit-pwtf-gp-massachusetts-new
+  - https://www.epa.gov/npdes/rainwater-harvesting-conservation-credit-codes-and-cost-literature-review-and-case-studies
+  - https://www.epa.gov/radon/are-we-sure-radon-health-risk
+  - https://www.epa.gov/radon/explain-working-levels-wl-and-picocuries-liter-air-pcil
+  - https://www.epa.gov/tmdl/supporting-documents-proposed-additions-west-virginias-2014-impaired-waters-list
+  - https://www.epa.gov/urbanwaterspartners/meeting-notes-september-27-2019-cano-martin-pena-urban-waters-partnership
+  - https://www.epa.gov/waterresilience/local-and-state-mutual-aid-water-sector-knowing-your-options-when-disaster-strikes
+  - https://www.epa.gov/waterutilityresponse/develop-or-update-emergency-response-plan
+  - https://www.health.harvard.edu/health-decision-guides
+  - https://www.health.harvard.edu/healthbeat
+  - https://www.health.harvard.edu/healthbeat/archive
+  - https://www.health.harvard.edu/special-health-reports
+  - https://www.health.harvard.edu/special-health-reports/addiction
+  - https://www.health.harvard.edu/special-health-reports/bones-and-joints
+  - https://www.health.harvard.edu/special-health-reports/brain-health
+  - https://www.health.harvard.edu/special-health-reports/diet-nutrition-and-weight-loss
+  - https://www.health.harvard.edu/special-health-reports/digestive-health
+  - https://www.health.harvard.edu/special-health-reports/favorites
+  - https://www.health.harvard.edu/special-health-reports/new-releases
   max_new_links: 3
   max_pool: 300
-
 offers:
-  clickbank_id: "YOURNICKNAME"
+  clickbank_id: YOURNICKNAME
   items:
-    - name: "Probiotic Health Booster"
-      hoplink: "https://{id}.vendor.hop.clickbank.net/?tid=BLOG"
-      blurb: "Clinically studied strains for gut balance."
-    - name: "Daily Greens Mix"
-      hoplink: "https://{id}.greenshop.hop.clickbank.net/?tid=BLOG"
-      blurb: "Whole-food micronutrients in one scoop."
+  - name: Probiotic Health Booster
+    hoplink: https://{id}.vendor.hop.clickbank.net/?tid=BLOG
+    blurb: Clinically studied strains for gut balance.
+  - name: Daily Greens Mix
+    hoplink: https://{id}.greenshop.hop.clickbank.net/?tid=BLOG
+    blurb: Whole-food micronutrients in one scoop.
