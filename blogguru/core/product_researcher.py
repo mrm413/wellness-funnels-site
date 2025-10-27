@@ -21,7 +21,7 @@ class ProductResearcher:
         
         openai.api_key = self.openai_key
         self.headers = {'User-Agent': 'Mozilla/5.0 (compatible; BlogGuru/1.0)'}
-    
+
     def research_product(self, product: dict) -> Dict:
         """
         Complete product research workflow
@@ -74,7 +74,7 @@ class ProductResearcher:
         print(f"✅ Trust Score: {trust_score}/100 - {'APPROVED' if approved else 'REJECTED'}")
         
         return result
-    
+
     def _scrape_landing_page(self, url: str) -> Dict:
         """Scrape and analyze product landing page"""
         try:
@@ -114,7 +114,7 @@ Return as JSON:
                 'ingredients': [],
                 'red_flags': ['Unable to scrape landing page']
             }
-    
+
     def _search_reviews(self, product_name: str) -> Dict:
         """Search for product reviews across multiple platforms"""
         reviews = {
@@ -156,7 +156,7 @@ Return as JSON:
             reviews.update(analysis)
         
         return reviews
-    
+
     def _check_scam_reports(self, product_name: str) -> Dict:
         """Check for scam reports and complaints"""
         scam_check = {
@@ -192,7 +192,7 @@ Return as JSON:
                 print(f"⚠️ Error checking scam reports: {e}")
         
         return scam_check
-    
+
     def _find_evidence(self, claims: List[str], keywords: List[str]) -> List[Dict]:
         """Find scientific evidence supporting product claims"""
         evidence = []
@@ -219,7 +219,7 @@ Return as JSON:
                     print(f"⚠️ Error finding evidence: {e}")
         
         return evidence
-    
+
     def _calculate_trust_score(self, product_data: Dict, reviews: Dict, 
                                scam_check: Dict, evidence: List) -> int:
         """Calculate overall trust score (0-100)"""
@@ -254,7 +254,7 @@ Return as JSON:
         
         # Clamp between 0-100
         return max(0, min(100, score))
-    
+
     def _generate_recommendation(self, trust_score: int, approved: bool) -> str:
         """Generate human-readable recommendation"""
         if trust_score >= 80:
@@ -265,13 +265,13 @@ Return as JSON:
             return "Proceed with caution - Mixed reviews or limited evidence"
         else:
             return "Not recommended - Insufficient evidence or negative indicators"
-    
+
     def _web_search(self, query: str, num_results: int = 5) -> List[Dict]:
         """Perform web search (placeholder - implement with actual search API)"""
         # TODO: Implement with actual search API (Google Custom Search, Bing, etc.)
         # For now, return empty list
         return []
-    
+
     def _extract_review_content(self, url: str) -> str:
         """Extract review content from URL"""
         try:
@@ -287,7 +287,7 @@ Return as JSON:
             
         except Exception:
             return ""
-    
+
     def _analyze_reviews_with_ai(self, reviews: List[str], product_name: str) -> Dict:
         """Analyze reviews using AI"""
         combined_reviews = "\n\n".join(reviews[:10])  # Limit to 10 reviews
@@ -334,7 +334,7 @@ Return as JSON:
                 'negative': [],
                 'neutral': []
             }
-    
+
     def _call_openai(self, prompt: str) -> str:
         """Call OpenAI API"""
         try:

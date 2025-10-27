@@ -18,7 +18,7 @@ class ContentGenerator:
             raise ValueError(f"OpenAI API key not found in environment variable: {config['openai']['api_key_env']}")
         
         openai.api_key = self.openai_key
-    
+
     def generate_content(self, product: dict, research: dict) -> Dict:
         """
         Generate complete blog post content
@@ -74,27 +74,27 @@ class ContentGenerator:
         print(f"✅ Content generated: {word_count} words")
         
         return result
-    
+
     def _create_outline(self, product: dict, research: dict) -> str:
         """Create content outline"""
         prompt = f"""Create a detailed outline for a blog post about "{product['name']}".
-
-Product Information:
-- Claims: {', '.join(research['claims'][:3])}
-- Benefits: {', '.join(research['benefits'][:3])}
-- Trust Score: {research['trust_score']}/100
-
-Requirements:
-- {self.config['content']['min_words']}-{self.config['content']['max_words']} words
-- Tone: {self.config['content']['tone']}
-- Include: Introduction, Benefits, Evidence, How It Works, Who It's For, FAQ, Conclusion
-- Pre-sell approach (build value before affiliate link)
-- Include sections for backlinks to authority sites
-
-Create an outline with H2 and H3 headings."""
-
+        
+        Product Information:
+        - Claims: {', '.join(research['claims'][:3])}
+        - Benefits: {', '.join(research['benefits'][:3])}
+        - Trust Score: {research['trust_score']}/100
+        
+        Requirements:
+        - {self.config['content']['min_words']}-{self.config['content']['max_words']} words
+        - Tone: {self.config['content']['tone']}
+        - Include: Introduction, Benefits, Evidence, How It Works, Who It's For, FAQ, Conclusion
+        - Pre-sell approach (build value before affiliate link)
+        - Include sections for backlinks to authority sites
+        
+        Create an outline with H2 and H3 headings."""
+        
         return self._call_openai(prompt, max_tokens=800)
-    
+
     def _generate_main_content(self, product: dict, research: dict, outline: str) -> str:
         """Generate main article content"""
         evidence_summary = "\n".join([
@@ -103,37 +103,37 @@ Create an outline with H2 and H3 headings."""
         ])
         
         prompt = f"""Write a comprehensive, engaging blog post about "{product['name']}" based on this outline.
-
-Outline:
-{outline}
-
-Product Details:
-- Claims: {', '.join(research['claims'])}
-- Benefits: {', '.join(research['benefits'])}
-- Supporting Evidence: {evidence_summary}
-
-Requirements:
-- {self.config['content']['min_words']}-{self.config['content']['max_words']} words
-- Tone: {self.config['content']['tone']}
-- Use short paragraphs (2-3 sentences)
-- Include subheadings (H2, H3)
-- Pre-sell approach: Build value and trust before mentioning the product
-- Include evidence from research
-- Natural, conversational style
-- SEO-optimized but not keyword-stuffed
-- Include FAQ section if enabled: {self.config['content']['include_faq']}
-- Include pros/cons if enabled: {self.config['content']['include_pros_cons']}
-
-Important:
-- DO NOT make medical claims
-- Encourage consulting healthcare professionals
-- Be honest about limitations
-- Include disclaimer about affiliate relationship
-
-Write the complete article in markdown format."""
-
+        
+        Outline:
+        {outline}
+        
+        Product Details:
+        - Claims: {', '.join(research['claims'])}
+        - Benefits: {', '.join(research['benefits'])}
+        - Supporting Evidence: {evidence_summary}
+        
+        Requirements:
+        - {self.config['content']['min_words']}-{self.config['content']['max_words']} words
+        - Tone: {self.config['content']['tone']}
+        - Use short paragraphs (2-3 sentences)
+        - Include subheadings (H2, H3)
+        - Pre-sell approach: Build value and trust before mentioning the product
+        - Include evidence from research
+        - Natural, conversational style
+        - SEO-optimized but not keyword-stuffed
+        - Include FAQ section if enabled: {self.config['content']['include_faq']}
+        - Include pros/cons if enabled: {self.config['content']['include_pros_cons']}
+        
+        Important:
+        - DO NOT make medical claims
+        - Encourage consulting healthcare professionals
+        - Be honest about limitations
+        - Include disclaimer about affiliate relationship
+        
+        Write the complete article in markdown format."""
+        
         return self._call_openai(prompt, max_tokens=2500)
-    
+
     def _add_backlinks(self, content: str, evidence: List[Dict]) -> str:
         """Add strategic backlinks to authority sites"""
         if not self.config['backlinks']['enabled']:
@@ -160,41 +160,41 @@ Write the complete article in markdown format."""
                 backlink_count += 1
         
         return content
-    
+
     def _generate_seo_title(self, product: dict, research: dict) -> str:
         """Generate SEO-optimized title (max 60 chars)"""
         prompt = f"""Create an SEO-optimized title (max 60 characters) for a blog post about "{product['name']}".
-
-Product benefits: {', '.join(research['benefits'][:2])}
-Keywords: {', '.join(product.get('keywords', [])[:2])}
-
-Requirements:
-- Compelling and click-worthy
-- Include main keyword
-- Under 60 characters
-- No clickbait
-
-Return only the title, nothing else."""
-
+        
+        Product benefits: {', '.join(research['benefits'][:2])}
+        Keywords: {', '.join(product.get('keywords', [])[:2])}
+        
+        Requirements:
+        - Compelling and click-worthy
+        - Include main keyword
+        - Under 60 characters
+        - No clickbait
+        
+        Return only the title, nothing else."""
+        
         title = self._call_openai(prompt, max_tokens=50)
         return title.strip('"').strip()[:60]
-    
+
     def _generate_meta_description(self, product: dict, research: dict) -> str:
         """Generate meta description (max 155 chars)"""
         prompt = f"""Create a compelling meta description (max 155 characters) for a blog post about "{product['name']}".
-
-Product benefits: {', '.join(research['benefits'][:2])}
-
-Requirements:
-- Compelling and informative
-- Include call-to-action
-- Under 155 characters
-
-Return only the description, nothing else."""
-
+        
+        Product benefits: {', '.join(research['benefits'][:2])}
+        
+        Requirements:
+        - Compelling and informative
+        - Include call-to-action
+        - Under 155 characters
+        
+        Return only the description, nothing else."""
+        
         desc = self._call_openai(prompt, max_tokens=100)
         return desc.strip('"').strip()[:155]
-    
+
     def _generate_slug(self, title: str) -> str:
         """Generate URL-friendly slug"""
         slug = title.lower()
@@ -205,7 +205,7 @@ Return only the description, nothing else."""
         # Add date prefix
         date_prefix = datetime.utcnow().strftime("%Y-%m-%d")
         return f"{date_prefix}-{slug}"
-    
+
     def _format_as_html(self, title: str, meta_description: str, 
                        content: str, product: dict, research: dict) -> str:
         """Format content as HTML"""
@@ -277,6 +277,14 @@ a:hover {{ text-decoration: underline; }}
     border-radius: 5px;
     margin: 20px 0;
 }}
+.complaint-section {{
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 0;
+    font-size: 0.9em;
+}}
 </style>
 </head>
 <body>
@@ -287,6 +295,12 @@ a:hover {{ text-decoration: underline; }}
 
 {affiliate_section}
 
+<div class="complaint-section">
+<h3>Report Issues with Affiliate Links</h3>
+<p>If you encounter any problems with the affiliate links above, or if you believe they lead to unsafe or misleading products, please let us know immediately. We investigate all complaints and remove problematic links.</p>
+<p><strong>Contact us:</strong> <a href="mailto:affiliate-complaints@example.com">affiliate-complaints@example.com</a></p>
+</div>
+
 <div class="disclaimer">
 {disclaimer}
 </div>
@@ -296,14 +310,18 @@ a:hover {{ text-decoration: underline; }}
 </html>"""
         
         return html
-    
+
     def _create_affiliate_section(self, product: dict, research: dict) -> str:
         """Create affiliate product section"""
         platform = product['platform']
         
         # Get affiliate link
-        if platform == 'clickbank':
-            affiliate_id = self.config['platforms']['clickbank']['nickname']
+        if 'affiliate_link' in product:
+            # Use manually provided affiliate link
+            affiliate_link = product['affiliate_link']
+        elif platform == 'clickbank':
+            # Generate hoplink if nickname is provided
+            affiliate_id = self.config['platforms']['clickbank'].get('nickname', 'YOURNICKNAME')
             affiliate_link = product['hoplink'].replace('{id}', affiliate_id)
         else:
             affiliate_link = product.get('hoplink', '#')
@@ -332,9 +350,15 @@ Learn More About {product['name']} →
 <strong>Note:</strong> This is an affiliate link. We may earn a commission if you make a purchase, 
 at no additional cost to you. We only recommend products we've thoroughly researched.
 </p>
+
+<p style="font-size: 0.8em; color: #888;">
+<strong>Medical Disclaimer:</strong> Before using any supplement, including {product['name']}, 
+you should consult with your healthcare provider to ensure it's appropriate for your 
+specific health conditions and doesn't interact with any medications you're taking.
+</p>
 </div>
 """
-    
+
     def _markdown_to_html(self, markdown: str) -> str:
         """Convert markdown to HTML (simplified)"""
         html = markdown
@@ -345,7 +369,7 @@ at no additional cost to you. We only recommend products we've thoroughly resear
         html = re.sub(r'^# (.+)$', r'<h1>\1</h1>', html, flags=re.MULTILINE)
         
         # Links
-        html = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', r'<a href="\2" target="_blank">\1</a>', html)
+        html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank">\1</a>', html)
         
         # Bold
         html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
@@ -362,12 +386,12 @@ at no additional cost to you. We only recommend products we've thoroughly resear
         html = '\n'.join([f'<p>{p}</p>' if not p.startswith('<') else p for p in paragraphs if p.strip()])
         
         return html
-    
+
     def _extract_backlinks(self, content: str) -> List[str]:
         """Extract all backlinks from content"""
         links = re.findall(r'href="([^"]+)"', content)
         return [link for link in links if link.startswith('http')]
-    
+
     def _call_openai(self, prompt: str, max_tokens: int = 2000) -> str:
         """Call OpenAI API"""
         try:

@@ -10,7 +10,7 @@ system:
 # OpenAI Configuration
 openai:
   api_key_env: OPENAI_API_KEY  # Environment variable name
-  model: gpt-4o-mini  # Options: gpt-4o-mini, gpt-4o, gpt-3.5-turbo
+  model: gpt-3.5-turbo  # Options: gpt-4, gpt-3.5-turbo
   temperature: 0.7
   max_tokens: 2000
 
@@ -51,7 +51,7 @@ research:
 platforms:
   clickbank:
     enabled: true
-    nickname: YOURNICKNAME  # Your ClickBank nickname
+    nickname: fuelaura  # Your ClickBank nickname
     tracking_id: BLOG
     
   amazon:
@@ -78,7 +78,10 @@ products:
     platform: clickbank
     product_id: "probiotic-50b"
     landing_page: "https://example.com/probiotic"  # Product landing page URL
+    # Option 1: Use hoplink template (automatically generates hoplink)
     hoplink: "https://{id}.vendor.hop.clickbank.net/?tid=BLOG"
+    # Option 2: Use manually collected affiliate link (overrides hoplink)
+    # affiliate_link: "https://example.com/your-manually-collected-link"
     category: health
     keywords:
       - probiotics
@@ -91,6 +94,7 @@ products:
     product_id: "omega3-ultra"
     landing_page: "https://example.com/omega3"
     hoplink: "https://{id}.omega.hop.clickbank.net/?tid=BLOG"
+    # affiliate_link: "https://example.com/your-manually-collected-link"
     category: health
     keywords:
       - omega 3
@@ -146,7 +150,10 @@ safety:
     Disclaimer: This post contains affiliate links. We may earn a commission 
     if you make a purchase through these links, at no additional cost to you. 
     Always consult with a healthcare professional before starting any new 
-    supplement regimen.
+    supplement regimen. The information provided in this post is for educational 
+    purposes only and should not be considered medical advice. Individual results 
+    may vary, and we encourage you to seek professional medical advice before 
+    making any decisions about supplementation.
 
 # Blacklist (products to never promote)
 blacklist:
