@@ -1,0 +1,158 @@
+# BlogGuru Configuration
+# This is an isolated system - changes here won't affect your main site
+
+# System Settings
+system:
+  enabled: true  # Set to false to completely disable BlogGuru
+  debug: false
+  log_level: INFO
+
+# OpenAI Configuration
+openai:
+  api_key_env: OPENAI_API_KEY  # Environment variable name
+  model: gpt-4o-mini  # Options: gpt-4o-mini, gpt-4o, gpt-3.5-turbo
+  temperature: 0.7
+  max_tokens: 2000
+
+# Content Settings
+content:
+  min_words: 1200
+  max_words: 2000
+  tone: professional  # Options: professional, casual, friendly, authoritative
+  include_faq: true
+  include_pros_cons: true
+  seo_optimized: true
+
+# Product Research Settings
+research:
+  trust_score_threshold: 60  # Minimum score (0-100) to proceed with content
+  max_negative_reviews: 30  # Max percentage of negative reviews allowed
+  require_evidence: true  # Require supporting evidence from trusted sources
+  check_scam_reports: true  # Search for scam reports
+  
+  # Sources to check for reviews
+  review_sources:
+    - trustpilot
+    - reddit
+    - bbb  # Better Business Bureau
+    - consumeraffairs
+    - sitejabber
+  
+  # Trusted sources for evidence
+  evidence_sources:
+    - pubmed.ncbi.nlm.nih.gov
+    - scholar.google.com
+    - nih.gov
+    - mayoclinic.org
+    - webmd.com
+    - healthline.com
+
+# Affiliate Platforms
+platforms:
+  clickbank:
+    enabled: true
+    nickname: YOURNICKNAME  # Your ClickBank nickname
+    tracking_id: BLOG
+    
+  amazon:
+    enabled: false
+    associate_id: YOUR-ASSOCIATE-ID
+    tracking_id: blog-20
+    
+  shareasale:
+    enabled: false
+    affiliate_id: YOUR-AFFILIATE-ID
+    
+  cj:
+    enabled: false
+    publisher_id: YOUR-PUBLISHER-ID
+    
+  custom:
+    enabled: false
+    # Add custom affiliate programs here
+
+# Products to Promote
+# BlogGuru will research each product before creating content
+products:
+  - name: "Probiotic 50B CFU"
+    platform: clickbank
+    product_id: "probiotic-50b"
+    landing_page: "https://example.com/probiotic"  # Product landing page URL
+    hoplink: "https://{id}.vendor.hop.clickbank.net/?tid=BLOG"
+    category: health
+    keywords:
+      - probiotics
+      - gut health
+      - digestive health
+      - immune system
+    
+  - name: "Ultra Omega-3 Supplement"
+    platform: clickbank
+    product_id: "omega3-ultra"
+    landing_page: "https://example.com/omega3"
+    hoplink: "https://{id}.omega.hop.clickbank.net/?tid=BLOG"
+    category: health
+    keywords:
+      - omega 3
+      - fish oil
+      - heart health
+      - brain health
+
+# Output Settings
+output:
+  directory: blogguru/output/blog
+  format: html  # Options: html, markdown
+  include_metadata: true
+  auto_publish: false  # Set to true to auto-copy to main blog directory
+
+# Quality Control
+quality:
+  check_plagiarism: true
+  check_readability: true
+  min_readability_score: 60  # Flesch Reading Ease score
+  check_keyword_density: true
+  max_keyword_density: 3  # Percentage
+
+# Backlink Strategy
+backlinks:
+  enabled: true
+  min_backlinks: 3
+  max_backlinks: 7
+  prefer_authority_sites: true
+  
+  # Authority sites to link to
+  authority_sites:
+    - nih.gov
+    - cdc.gov
+    - mayoclinic.org
+    - health.harvard.edu
+    - webmd.com
+    - healthline.com
+
+# Scheduling (for automated runs)
+schedule:
+  enabled: false  # Set to true to enable scheduled runs
+  frequency: daily  # Options: daily, weekly, custom
+  time: "09:00"  # 24-hour format
+  max_posts_per_run: 2
+
+# Safety & Compliance
+safety:
+  avoid_medical_claims: true
+  include_disclaimers: true
+  check_ftc_compliance: true
+  
+  disclaimer_text: |
+    Disclaimer: This post contains affiliate links. We may earn a commission 
+    if you make a purchase through these links, at no additional cost to you. 
+    Always consult with a healthcare professional before starting any new 
+    supplement regimen.
+
+# Blacklist (products to never promote)
+blacklist:
+  products: []
+  keywords:
+    - scam
+    - fake
+    - dangerous
+  domains: []
