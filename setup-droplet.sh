@@ -42,7 +42,7 @@ su - $ACTUAL_USER -c "ollama pull llama3.2:3b"
 
 echo ""
 echo -e "${GREEN}Installing Python dependencies...${NC}"
-pip3 install trafilatura readability-lxml beautifulsoup4 requests pyyaml python-slugify python-frontmatter markdownify feedparser
+pip3 install --break-system-packages trafilatura readability-lxml beautifulsoup4 requests pyyaml python-slugify python-frontmatter markdownify feedparser
 
 echo ""
 echo -e "${YELLOW}=========================================="

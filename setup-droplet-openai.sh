@@ -28,7 +28,7 @@ apt install -y python3 python3-pip git curl
 
 echo ""
 echo -e "${GREEN}Installing Python dependencies...${NC}"
-pip3 install trafilatura readability-lxml beautifulsoup4 requests pyyaml python-slugify python-frontmatter markdownify feedparser
+pip3 install --break-system-packages trafilatura readability-lxml beautifulsoup4 requests pyyaml python-slugify python-frontmatter markdownify feedparser
 
 echo ""
 echo -e "${YELLOW}=========================================="
