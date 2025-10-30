@@ -26,19 +26,39 @@ source ~/.blogguru-env
 
 Edit `blogguru/config.yml`:
 
+#### For ClickBank Products (Manual Link Collection):
+1. Go to ClickBank Marketplace
+2. Find your product
+3. Click "Promote" and copy the encrypted affiliate link
+4. Add it to your product configuration:
+
 ```yaml
 # Update your ClickBank nickname
 platforms:
   clickbank:
-    nickname: YOUR_CLICKBANK_NICKNAME  # Change this!
+    nickname: fuelaura  # Your actual ClickBank nickname
 
-# Add your products
+# Add your products with manual affiliate links
 products:
   - name: "Your Product Name"
     platform: clickbank
     product_id: "your-product-id"
     landing_page: "https://product-landing-page.com"  # Important!
-    hoplink: "https://{id}.vendor.hop.clickbank.net/?tid=BLOG"
+    affiliate_link: "https://your-manually-copied-affiliate-link.com"  # Use this instead of hoplink
+    category: health
+    keywords:
+      - keyword1
+      - keyword2
+```
+
+#### For Other Platforms or Legacy ClickBank Setup:
+```yaml
+products:
+  - name: "Your Product Name"
+    platform: clickbank
+    product_id: "your-product-id"
+    landing_page: "https://product-landing-page.com"  # Important!
+    hoplink: "https://{id}.vendor.hop.clickbank.net/?tid=BLOG"  # Template
     category: health
     keywords:
       - keyword1
@@ -132,6 +152,8 @@ cat blogguru/data/blacklist.json | jq
 - ✅ Adds pros/cons
 - ✅ Creates compelling CTA
 - ✅ Includes FTC-compliant disclaimer
+- ✅ Adds complaint reporting mechanism
+- ✅ Includes enhanced medical disclaimer
 
 ### 3. Quality Control
 - ✅ Checks readability score
@@ -248,7 +270,7 @@ cat blogguru/data/blacklist.json | jq
 
 ---
 
-## 🎓 Best Practices
+## 🛡️ Best Practices
 
 1. **Start with dry run** - Research products first before generating content
 2. **Review research data** - Check trust scores and evidence before publishing
@@ -256,10 +278,12 @@ cat blogguru/data/blacklist.json | jq
 4. **Monitor blacklist** - Review rejected products periodically
 5. **Test content** - Read generated content before publishing
 6. **Update regularly** - Re-research products every few months
+7. **Use manual links** - For ClickBank, manually collect and verify affiliate links
+8. **Check complaints** - Monitor the complaint reporting email for issues
 
 ---
 
-## 🔐 Safety Features
+## 🔒 Safety Features
 
 - ✅ **Isolated system** - Won't break your main site
 - ✅ **Quality control** - Rejects low-quality products
@@ -267,6 +291,8 @@ cat blogguru/data/blacklist.json | jq
 - ✅ **Medical safety** - Avoids medical claims
 - ✅ **Scam detection** - Checks for fraud reports
 - ✅ **Review validation** - Detects fake reviews
+- ✅ **Complaint mechanism** - Users can report problematic links
+- ✅ **Enhanced disclaimers** - Clear medical consultation advice
 
 ---
 
